@@ -8,6 +8,8 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Dashboard from './pages/Dashboard';
 import AdminUpload from './pages/AdminUpload';
 import Unauthorized from './pages/Unauthorized';
+import Members from './pages/Members';
+import Notes from './pages/Notes';
 import ParallaxBackground from './components/ParallaxBackground';
 import { LogIn, LogOut, User as UserIcon, Shield, X } from 'lucide-react';
 
@@ -17,6 +19,8 @@ const Navigation = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
+    { name: 'Members', path: '/members' },
+    { name: 'Notes', path: '/notes' },
     { name: 'Leaderboard', path: '/#leaderboard' },
   ];
 
@@ -132,7 +136,7 @@ function AppContent() {
   const location = useLocation();
 
   useEffect(() => {
-    console.log("%c LEETVERSE v1.0 %c INITIATED ",
+    console.log("%c LeetVerse %c Ready ",
       "color: #050505; background: #00ff9d; font-weight: bold;",
       "color: #00ff9d; background: #111111;");
   }, []);
@@ -159,16 +163,16 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-background selection:bg-accent selection:text-background text-white">
       {/* Visual background layers */}
-      <div className="fixed inset-0 cyber-grid pointer-events-none opacity-30" />
-      <div className="fixed inset-0 bg-gradient-to-tr from-background via-transparent to-accent/10 pointer-events-none" />
-      <div className="fixed top-0 right-0 w-[50vw] h-full bg-gradient-to-l from-accent/20 to-transparent pointer-events-none z-0 blur-[120px] opacity-60" />
+      <div className="fixed inset-0 cyber-grid pointer-events-none opacity-[0.15]" />
+      <div className="fixed inset-0 bg-gradient-to-tr from-background via-transparent to-accent/5 pointer-events-none" />
+      <div className="fixed top-0 right-0 w-[50vw] h-full bg-gradient-to-l from-accent/10 to-transparent pointer-events-none z-0 blur-[160px] opacity-40" />
 
       <ParallaxBackground />
       <Particles />
 
       {/* Background terminal scan-line effect */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-[0.03]">
-        <div className="w-full h-1 bg-accent/50 animate-scanline shadow-[0_0_10px_rgba(0,255,157,0.5)]" />
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-[0.015]">
+        <div className="w-full h-[0.5px] bg-accent/30 animate-scanline shadow-[0_0_8px_rgba(0,255,157,0.3)]" />
       </div>
 
       <Navigation />
@@ -178,6 +182,8 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<Dashboard />} />
           <Route path="/admin" element={<AdminUpload />} />
+          <Route path="/members" element={<Members />} />
+          <Route path="/notes" element={<Notes />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
         </Routes>
       </main>

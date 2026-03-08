@@ -28,6 +28,8 @@ const Connect = () => {
                                 <motion.a
                                     key={link.name}
                                     href={link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     whileHover={{ y: -5 }}
                                     className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 hover:border-accent/40 hover:text-accent transition-all group"
                                 >
