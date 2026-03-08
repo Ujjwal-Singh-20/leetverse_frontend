@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import Hero from './components/Hero';
 import Leaderboard from './components/Leaderboard';
 import Connect from './components/Connect';
@@ -26,7 +26,9 @@ const Navigation = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md border-b border-white/5 bg-background/50">
       <Link to="/" className="flex items-center gap-2 relative z-[60]">
         <img src="/leetverse logo.jpg" alt="LeetVerse Logo" className="w-10 h-10 object-contain rounded-sm" />
-        <span className="font-display font-bold text-xl tracking-tighter">LEET<span className="text-accent underline decoration-accent/30 underline-offset-4">VERSE</span></span>
+        <span className="font-display font-bold text-xl tracking-tighter">
+          LEET<span className="text-accent underline decoration-accent/30 underline-offset-4">VERSE</span>
+        </span>
       </Link>
 
       {/* Desktop Navigation */}
@@ -127,9 +129,12 @@ const HomePage = () => (
 function AppContent() {
   const { isUnauthorized } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    console.log("%c LEETVERSE v1.0 %c INITIATED ", "color: #050505; background: #00ff9d; font-weight: bold;", "color: #00ff9d; background: #111111;");
+    console.log("%c LEETVERSE v1.0 %c INITIATED ",
+      "color: #050505; background: #00ff9d; font-weight: bold;",
+      "color: #00ff9d; background: #111111;");
   }, []);
 
   useEffect(() => {
@@ -137,6 +142,19 @@ function AppContent() {
       navigate('/unauthorized');
     }
   }, [isUnauthorized, navigate]);
+
+  // 👇 Scroll to hash target when location changes
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // optional: scroll to top when no hash
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-background selection:bg-accent selection:text-background text-white">
@@ -148,7 +166,7 @@ function AppContent() {
       <ParallaxBackground />
       <Particles />
 
-      {/* Background terminal scan-line effect - Moved behind content */}
+      {/* Background terminal scan-line effect */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-[0.03]">
         <div className="w-full h-1 bg-accent/50 animate-scanline shadow-[0_0_10px_rgba(0,255,157,0.5)]" />
       </div>
