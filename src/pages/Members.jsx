@@ -119,7 +119,7 @@ const Members = () => {
                     className="text-center mb-24"
                 >
                     <h2 className="text-accent font-mono text-sm tracking-[0.5em] uppercase mb-4">Core Team</h2>
-                    <h1 className="text-6xl md:text-8xl font-display font-bold tracking-tighter mb-6 bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent">
+                    <h1 className="text-4xl sm:text-6xl md:text-8xl font-display font-bold tracking-tighter mb-6 bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent">
                         MEMBERS
                     </h1>
                     <div className="h-1 w-24 bg-accent mx-auto mb-8" />
@@ -201,7 +201,7 @@ const Members = () => {
                             transition={{ duration: 0.8 }}
                             className="relative"
                         >
-                            <h2 className="text-7xl md:text-9xl font-display font-black tracking-tighter text-white/5 uppercase select-none">
+                            <h2 className="text-5xl sm:text-7xl md:text-9xl font-display font-black tracking-tighter text-white/5 uppercase select-none">
                                 Coming Soon
                             </h2>
                             <div className="absolute inset-0 flex items-center justify-center">

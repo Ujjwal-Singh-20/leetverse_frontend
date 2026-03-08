@@ -78,11 +78,11 @@ const Notes = () => {
                         <span className="text-white/40 font-mono text-[10px] uppercase tracking-[0.3em] font-bold">Resources</span>
                     </div>
 
-                    <h1 className="text-6xl md:text-8xl font-display font-bold tracking-tighter mb-8 bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase">
+                    <h1 className="text-4xl sm:text-6xl md:text-8xl font-display font-bold tracking-tighter mb-8 bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase">
                         Notes
                     </h1>
 
-                    <p className="text-white/40 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+                    <p className="text-white/40 max-w-2xl mx-auto text-base md:text-lg font-light leading-relaxed">
                         Find all our shared study materials and code repositories in one place.
                     </p>
                 </motion.div>

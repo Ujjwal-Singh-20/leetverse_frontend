@@ -16,6 +16,7 @@ import { LogIn, LogOut, User as UserIcon, Shield, X } from 'lucide-react';
 const Navigation = () => {
   const { user, login, logout, isAdmin } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -26,99 +27,142 @@ const Navigation = () => {
 
   const handleLinkClick = () => setIsMenuOpen(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md border-b border-white/5 bg-background/50">
-      <Link to="/" className="flex items-center gap-2 relative z-[60]">
-        <img src="/leetverse logo.jpg" alt="LeetVerse Logo" className="w-10 h-10 object-contain rounded-sm" />
-        <span className="font-display font-bold text-xl tracking-tighter">
-          LEET<span className="text-accent underline decoration-accent/30 underline-offset-4">VERSE</span>
-        </span>
-      </Link>
-
-      {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest">
-        {navLinks.map(link => (
-          <Link key={link.name} to={link.path} className="hover:text-accent transition-colors">{link.name}</Link>
-        ))}
-
-        {user ? (
-          <div className="flex items-center gap-6">
-            {isAdmin && (
-              <Link to="/admin" className="flex items-center gap-2 text-accent hover:opacity-80 transition-all">
-                <Shield size={14} /> ADMIN_PORTAL
-              </Link>
-            )}
-            <Link to="/profile" className="flex items-center gap-2 hover:text-accent transition-all">
-              <UserIcon size={14} /> {user.rollNo}
-            </Link>
-            <button
-              onClick={logout}
-              className="flex items-center gap-2 text-white/40 hover:text-red-400 transition-all"
-            >
-              <LogOut size={14} /> LOGOUT
-            </button>
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 px-6 py-4 flex items-center justify-between ${isScrolled ? 'bg-background/80 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
+        }`}>
+        <Link to="/" className="flex items-center gap-2 group relative z-[60]" onClick={handleLinkClick}>
+          <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center border border-accent/30 group-hover:border-accent/50 transition-all overflow-hidden lg:block hidden">
+            <img
+              src="/leetverse logo.jpg"
+              alt="Logo"
+              className="w-full h-full object-cover"
+            />
           </div>
-        ) : (
-          <button
-            className="px-6 py-2 border border-accent text-accent hover:bg-accent hover:text-background transition-all flex items-center gap-2 group"
-            onClick={login}
-          >
-            <LogIn size={14} className="group-hover:translate-x-1 transition-transform" /> REGISTER / LOGIN
-          </button>
-        )}
-      </div>
+          <div className="lg:hidden w-8 h-8 bg-accent/20 rounded-md flex items-center justify-center border border-accent/20">
+            <img
+              src="/leetverse logo.jpg"
+              alt="Logo"
+              className="w-full h-full object-cover rounded-md"
+            />
+          </div>
+          <span className="text-xl font-display font-bold tracking-tighter text-white group-hover:text-accent transition-colors">
+            LEET<span className="text-accent underline decoration-accent/30 underline-offset-4">VERSE</span>
+          </span>
+        </Link>
 
-      {/* Mobile Menu Toggle */}
-      <button
-        className="md:hidden relative z-[60] p-2 text-accent"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-      >
-        {isMenuOpen ? <X size={24} /> : <div className="space-y-1.5 w-6">
-          <div className="h-0.5 bg-accent w-full" />
-          <div className="h-0.5 bg-accent w-full" />
-          <div className="h-0.5 bg-accent w-full" />
-        </div>}
-      </button>
-
-      {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-background z-[55] transition-transform duration-500 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden flex flex-col items-center justify-center p-8 space-y-12`}>
-        <div className="flex flex-col items-center gap-8 text-xl font-mono uppercase tracking-[0.3em]">
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-8 text-m font-mono uppercase tracking-widest">
           {navLinks.map(link => (
-            <Link key={link.name} to={link.path} onClick={handleLinkClick} className="hover:text-accent transition-colors">{link.name}</Link>
+            <Link key={link.name} to={link.path} className="hover:text-accent transition-colors">{link.name}</Link>
           ))}
         </div>
 
-        <div className="h-[1px] w-12 bg-white/10" />
+        {/* Auth/Profile Section (Desktop) */}
+        <div className="hidden lg:flex items-center gap-6">
+          {user ? (
+            <div className="flex items-center gap-4">
+              {isAdmin && (
+                <Link to="/admin" className="p-2 text-accent hover:bg-accent/10 rounded-lg transition-all" title="Admin Portal">
+                  <Shield size={20} />
+                </Link>
+              )}
+              <Link to="/profile" className="flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-accent/40 transition-all">
+                <UserIcon size={16} className="text-accent" />
+                <span className="text-xs font-mono text-white tracking-widest">{user.rollNo}</span>
+              </Link>
+              <button
+                onClick={logout}
+                className="p-2 text-white/40 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
+                title="Logout"
+              >
+                <LogOut size={20} />
+              </button>
+            </div>
+          ) : (
+            <button
+              className="group relative px-6 py-2 overflow-hidden"
+              onClick={login}
+            >
+              <div className="absolute inset-0 border border-accent/50 group-hover:border-accent transition-colors" />
+              <div className="absolute inset-x-0 bottom-0 h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+              <span className="relative flex items-center gap-2 text-xs font-mono text-white tracking-[0.2em]">
+                <LogIn size={14} className="text-accent" />
+                REGISTER / LOGIN
+              </span>
+            </button>
+          )}
+        </div>
 
-        <div className="flex flex-col items-center gap-8">
+        {/* Mobile Menu Toggle */}
+        <button
+          className="lg:hidden relative z-[110] p-2 text-accent"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X size={24} /> : <div className="space-y-1.5 w-6">
+            <div className="h-0.5 bg-accent w-full" />
+            <div className="h-0.5 bg-accent w-full" />
+            <div className="h-0.5 bg-accent w-full" />
+          </div>}
+        </button>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 bg-background z-[105] transition-all duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} lg:hidden flex flex-col items-center justify-center p-8 space-y-12 overflow-y-auto`}>
+        <div className="flex flex-col items-center gap-10 text-2xl font-display font-bold uppercase tracking-[0.2em]">
+          {navLinks.map((link, i) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              onClick={handleLinkClick}
+              className="hover:text-accent transition-all hover:scale-110 active:scale-95"
+              style={{ transitionDelay: `${i * 50}ms` }}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+
+        <div className="h-[1px] w-12 bg-white/10 shrink-0" />
+
+        <div className="flex flex-col items-center gap-8 pb-12 w-full max-w-xs">
           {user ? (
             <>
               {isAdmin && (
-                <Link to="/admin" onClick={handleLinkClick} className="flex items-center gap-2 text-accent font-mono text-sm tracking-widest">
+                <Link to="/admin" onClick={handleLinkClick} className="flex items-center gap-3 text-accent font-mono text-sm tracking-widest text-center py-2 px-6 border border-accent/20 rounded-full w-full justify-center">
                   <Shield size={18} /> ADMIN_PORTAL
                 </Link>
               )}
-              <Link to="/profile" onClick={handleLinkClick} className="flex items-center gap-2 text-white font-mono text-sm tracking-widest">
-                <UserIcon size={18} /> {user.rollNo}
+              <Link to="/profile" onClick={handleLinkClick} className="flex items-center gap-3 text-white font-mono text-sm tracking-widest text-center py-2 px-6 border border-white/10 rounded-full w-full justify-center">
+                <UserIcon size={18} className="text-accent" /> {user.rollNo}
               </Link>
               <button
                 onClick={() => { logout(); handleLinkClick(); }}
-                className="flex items-center gap-2 text-red-400 font-mono text-xs tracking-widest"
+                className="flex items-center gap-2 text-red-400 font-mono text-xs tracking-widest hover:text-red-300 transition-colors"
               >
-                <LogOut size={16} /> LOGOUT
+                <LogOut size={16} /> LOGOUT_SESSION
               </button>
             </>
           ) : (
             <button
-              className="px-8 py-3 border border-accent text-accent font-mono text-sm tracking-widest"
+              className="w-full py-4 border border-accent/40 text-accent font-mono text-sm tracking-[0.3em] font-bold hover:bg-accent/5 active:bg-accent/10 transition-all rounded-sm uppercase"
               onClick={() => { login(); handleLinkClick(); }}
             >
-              REGISTER / LOGIN
+              Access Portal
             </button>
           )}
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 

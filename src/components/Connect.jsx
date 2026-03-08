@@ -1,9 +1,9 @@
+
 import { motion } from 'framer-motion';
 import { Youtube, Linkedin, Instagram, Github, ArrowUpRight } from 'lucide-react';
 
 const Connect = () => {
     const socialLinks = [
-        { name: 'GitHub', icon: <Github />, url: '#' },
         { name: 'LinkedIn', icon: <Linkedin />, url: 'https://www.linkedin.com/company/leetverse/' },
         { name: 'YouTube', icon: <Youtube />, url: 'https://www.youtube.com/@Leetverse' },
         { name: 'Instagram', icon: <Instagram />, url: 'https://www.instagram.com/leetverse/' },
@@ -13,7 +13,7 @@ const Connect = () => {
         <footer className="py-24 px-4 border-t border-white/5 relative overflow-hidden">
             {/* Background Text */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-white/[0.02] whitespace-nowrap pointer-events-none uppercase tracking-tighter">
-                E-LABS
+                LEETVERSE
             </div>
 
             <div className="max-w-5xl mx-auto relative z-10">
@@ -21,7 +21,7 @@ const Connect = () => {
                     <div>
                         <h2 className="text-3xl font-bold mb-6">CONNECT WITH <span className="text-accent">US</span></h2>
                         <p className="text-text-secondary text-lg mb-8 max-w-md">
-                            Join our community of passionate developers and problem solvers. Stay updated with the latest events and challenges.
+                            Join our community of passionate developers and problem solvers. Stay updated with our latest sessions.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             {socialLinks.map((link) => (
@@ -43,15 +43,17 @@ const Connect = () => {
 
                     <div className="space-y-8">
                         <div className="p-8 bg-accent/5 border border-accent/10">
-                            <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-4">Current Status</h3>
+                            <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-4">Community Info</h3>
                             <div className="space-y-2">
                                 <div className="flex justify-between text-sm">
-                                    <span className="text-text-dim">Active Members:</span>
-                                    <span className="text-text-primary font-mono">250+</span>
+                                    <span className="text-text-dim">Focus:</span>
+                                    <span className="text-text-primary font-mono">Skill Development</span>
                                 </div>
                                 <div className="flex justify-between text-sm">
-                                    <span className="text-text-dim">Projects Shipped:</span>
-                                    <span className="text-text-primary font-mono">15+</span>
+                                    {/* <span className="text-text-dim">Environment:</span>
+                                    <span className="text-text-primary font-mono">Collaborative</span> */}
+                                    <span className="text-text-dim">Status:</span>
+                                    <span className="text-text-primary font-mono">Growing Daily</span>
                                 </div>
                                 <div className="flex justify-between text-sm">
                                     <span className="text-text-dim">Current Event:</span>
@@ -61,7 +63,7 @@ const Connect = () => {
                         </div>
 
                         <p className="text-text-dim text-xs font-mono">
-                            &copy; {new Date().getFullYear()} E-LABS. ALL RIGHTS RESERVED.
+                            &copy; {new Date().getFullYear()} LEETVERSE. ALL RIGHTS RESERVED.
                             <br />
                             DESIGNED FOR THE ELITE.
                         </p>
@@ -73,3 +75,4 @@ const Connect = () => {
 };
 
 export default Connect;
+
