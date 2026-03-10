@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { getUserHistory, getUserProfile, getMyProfile, getOverallLeaderboard } from '../services/api';
 import { Trophy, Calendar, Award, User, Users, Eye, X, Shield, ChevronRight } from 'lucide-react';
+import UserAvatar from '../components/UserAvatar';
+
 
 const UserDetailModal = ({ user, onClose }) => {
     const [rank, setRank] = useState('--');
@@ -415,11 +417,26 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <div className="glass-panel p-6 sm:p-10 flex flex-col items-center justify-center text-center border-white/5 relative group cursor-default">
-                    <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <Award className="text-accent mb-6 animate-pulse" size={56} />
-                    <h3 className="font-display font-bold text-xl mb-2 text-white tracking-tight">ACHIEVEMENTS</h3>
-                    <p className="text-white/30 text-xs font-mono uppercase tracking-[0.2em]">System Expansion Pending...</p>
+                <div className="glass-panel p-0 flex flex-col items-center justify-center text-center border-white/5 relative group overflow-hidden bg-black/40">
+                    <div className="absolute top-8 left-8 z-20 pointer-events-none">
+                        <div className="flex items-center gap-2 mb-1">
+                            <div className="w-1.5 h-1.5 bg-accent animate-pulse rounded-full" />
+                            <h3 className="font-display font-bold text-xl text-white tracking-tight drop-shadow-2xl">IDENTITY_VOID</h3>
+                        </div>
+                        {/* <p className="text-accent/60 text-[9px] font-mono uppercase tracking-[0.3em]">Neural_Signature: Verified</p> */}
+                        {/* <div className="mt-4 flex gap-1">
+                            <div className="w-8 h-[2px] bg-accent/20" />
+                            <div className="w-2 h-[2px] bg-accent/40" />
+                            <div className="w-1 h-[2px] bg-accent" />
+                        </div> */}
+                    </div>
+                    <div className="w-full h-full min-h-[350px]">
+                        <UserAvatar seed={user?.rollNo || '007'} totalPoints={profile?.totalPoints || 0} />
+                    </div>
+                    <div className="absolute bottom-6 right-8 z-20 pointer-events-none text-right">
+                        {/* <span className="text-white/20 font-mono text-[8px] uppercase tracking-widest block">Core_System_Sync</span> */}
+                        {/* <span className="text-accent/30 font-mono text-[10px] uppercase font-bold">STABLE_CONNECTION</span> */}
+                    </div>
                 </div>
             </div>
 
