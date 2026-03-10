@@ -435,9 +435,7 @@ const Dashboard = () => {
                     <thead className="border-b border-white/5 bg-white/5">
                         <tr>
                             <th className="px-8 py-6 text-[10px] text-white/40 uppercase tracking-widest">Date / Index</th>
-                            <th className="px-8 py-6 text-[10px] text-white/40 uppercase tracking-widest">Delta Points</th>
                             <th className="px-8 py-6 text-[10px] text-white/40 uppercase tracking-widest">Status Code</th>
-                            <th className="px-8 py-6 text-[10px] text-white/40 uppercase tracking-widest">System Remarks</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-white/5">
@@ -445,7 +443,6 @@ const Dashboard = () => {
                             history.map((entry, idx) => (
                                 <tr key={idx} className="hover:bg-white/5 transition-colors group">
                                     <td className="px-8 py-6 text-white group-hover:text-accent transition-colors">{entry.date}</td>
-                                    <td className="px-8 py-6 font-bold text-accent">+{entry.points}</td>
                                     <td className="px-8 py-6">
                                         <span className={`px-2 py-1 text-[10px] font-bold rounded-sm border uppercase ${entry.status === 'present'
                                             ? 'text-accent border-accent/20 bg-accent/5'
@@ -454,12 +451,11 @@ const Dashboard = () => {
                                             {entry.status}
                                         </span>
                                     </td>
-                                    <td className="px-8 py-6 text-white/40 italic">{entry.remarks || '---'}</td>
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="4" className="px-8 py-20 text-center text-white/20 italic font-mono uppercase tracking-widest">
+                                <td colSpan="2" className="px-8 py-20 text-center text-white/20 italic font-mono uppercase tracking-widest">
                                     No transaction history found for this identifier.
                                 </td>
                             </tr>
