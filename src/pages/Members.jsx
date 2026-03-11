@@ -275,7 +275,7 @@ const Members = () => {
                                     whileHover={{ scale: 1.05 }}
                                     className="px-8 py-3 border border-accent/20 bg-background/80 backdrop-blur-md rounded-full shadow-2xl"
                                 >
-                                    <p className="text-accent font-mono text-sm tracking-[0.4em] uppercase font-bold">More roles pending</p>
+                                    <p className="text-accent font-mono text-sm tracking-[0.4em] uppercase font-bold">More roles</p>
                                 </motion.div>
                             </div>
                         </motion.div>
