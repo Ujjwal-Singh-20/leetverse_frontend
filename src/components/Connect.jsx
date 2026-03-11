@@ -12,7 +12,7 @@ const Connect = () => {
     return (
         <footer className="py-24 px-4 border-t border-white/5 relative overflow-hidden">
             {/* Background Text */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-white/[0.02] whitespace-nowrap pointer-events-none uppercase tracking-tighter">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-white/[0.02] whitespace-nowrap pointer-events-none uppercase tracking-tighter select-none">
                 LEETVERSE
             </div>
 

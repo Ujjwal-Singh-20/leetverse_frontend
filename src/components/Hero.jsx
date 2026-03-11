@@ -121,7 +121,7 @@ const Hero = () => {
 
                     <motion.h1
                         variants={itemVariants}
-                        className="text-7xl md:text-9xl font-bold mb-6 tracking-tighter"
+                        className="text-5xl md:text-9xl font-bold mb-6 tracking-tighter"
                     >
                         LEET<span className="text-accent neon-text">VERSE</span>
                     </motion.h1>

@@ -83,12 +83,12 @@ const Leaderboard = () => {
                     <h2 className="text-5xl font-black mb-4 font-display tracking-tighter text-white">THE_<span className="text-accent underline decoration-accent/30 underline-offset-8">LEADERBOARD</span></h2>
                     <p className="text-white/70 font-mono tracking-[0.3em] uppercase text-sm font-bold">Season 1 &bull; RANKINGS</p>
                 </div>
-                <button
+                {/* <button
                     onClick={fetchLeaderboard}
                     className="flex items-center gap-2 font-mono text-xs text-accent hover:opacity-70 transition-all uppercase tracking-widest border border-accent/20 px-4 py-2 rounded-sm"
                 >
                     <RefreshCcw size={14} className={loading ? 'animate-spin' : ''} /> SYNC_REALTIME
-                </button>
+                </button> */}
             </div>
 
             {loading && leaderboardData.length === 0 ? (
@@ -155,7 +155,7 @@ const Leaderboard = () => {
                                             )}
                                         </div>
                                         {item.name && (
-                                            <p className="text-sm text-accent/90 font-black font-mono group-hover:translate-x-1 transition-transform duration-300 tracking-tight brightness-125 whitespace-nowrap">
+                                            <p className="text-sm text-accent/90 font-black font-mono group-hover:translate-x-1 transition-transform duration-300 tracking-tight brightness-125 truncate max-w-[120px] sm:max-w-none">
                                                 {item.name}
                                             </p>
                                         )}

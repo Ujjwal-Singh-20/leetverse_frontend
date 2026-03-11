@@ -1,6 +1,12 @@
 @import "tailwindcss";
 /* Build: 2026-02-16T13:22:00 */
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
 @theme {
   --color-background: #050505;
   --color-background-secondary: #0a0a0a;
@@ -71,6 +77,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    width: 100%;
   }
 
   h1,
