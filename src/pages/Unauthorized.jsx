@@ -32,12 +32,12 @@ const Unauthorized = () => {
                 </p>
 
                 <div className="flex flex-col gap-4">
-                    <button
+                    {/* <button
                         onClick={login}
                         className="w-full py-4 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-500 font-display font-bold tracking-widest transition-all flex items-center justify-center gap-2"
                     >
                         <LogIn size={18} /> TRY_ANOTHER_ACCOUNT
-                    </button>
+                    </button> */}
 
                     <button
                         onClick={handleLogoutAndHome}

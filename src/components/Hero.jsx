@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { X, Zap } from 'lucide-react';
+import { X, Zap, Instagram } from 'lucide-react';
 
 const ELabsModal = ({ onClose }) => (
     <AnimatePresence>
@@ -31,7 +31,7 @@ const ELabsModal = ({ onClose }) => (
                 {/* Glow blob */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-accent/8 blur-[60px] pointer-events-none" />
 
-                <div className="p-8 md:p-10">
+                <div className="p-8 md:p-10 pt-12 md:pt-14 relative overflow-y-auto max-h-[85vh]">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-8">
                         <div>
@@ -44,13 +44,13 @@ const ELabsModal = ({ onClose }) => (
                             </h2>
                             <div className="mt-1 h-[1px] w-16 bg-gradient-to-r from-accent/60 to-transparent" />
                         </div>
-                        <button
-                            onClick={onClose}
-                            className="p-2 text-white/30 hover:text-accent hover:bg-accent/10 rounded-sm transition-all border border-transparent hover:border-accent/20"
-                        >
-                            <X size={18} />
-                        </button>
                     </div>
+                    <button
+                        onClick={onClose}
+                        className="absolute top-6 right-6 p-2 text-white/30 hover:text-accent hover:bg-accent/10 rounded-sm transition-all border border-transparent hover:border-accent/20 z-[210]"
+                    >
+                        <X size={18} />
+                    </button>
 
                     {/* Divider */}
                     <div className="flex items-center gap-3 mb-6">
@@ -59,20 +59,30 @@ const ELabsModal = ({ onClose }) => (
                     </div>
 
                     {/* Body */}
-                    <p className="text-white/70 leading-relaxed text-sm md:text-base font-light tracking-wide">
-                        E-Labs is a student-run peer-to-peer technical engagement platform designed to empower learners. We go beyond the confines of traditional academic curricula, offering a diverse range of courses and projects that cater to your unique interests and professional aspirations.
-                    </p>
-                    <p className="mt-4 text-white/70 leading-relaxed text-sm md:text-base font-light tracking-wide">
-                        Our platform provides a dynamic and collaborative learning environment where you can connect with fellow students, share knowledge, and work together on challenging projects. By actively engaging with your peers, you gain valuable real-world experience, develop essential soft skills, and bridge the critical gap between theoretical knowledge and the ever-evolving demands of the professional world.
-                    </p>
-                    <p className="mt-4 text-white/70 leading-relaxed text-sm md:text-base font-light tracking-wide">
-                        At E-Labs, we believe in the power of collaborative learning and mentorship to foster innovation, creativity, and personal growth. Join us on this exciting journey of discovery and unlock your full potential.
-                    </p>
+                    <div className="space-y-4">
+                        <p className="text-white/70 leading-relaxed text-sm md:text-base font-light tracking-wide">
+                            E-Labs is a student-run peer-to-peer technical engagement platform designed to empower learners. We go beyond the confines of traditional academic curricula, offering a diverse range of courses and projects that cater to your unique interests and professional aspirations.
+                        </p>
+                        <p className="text-white/70 leading-relaxed text-sm md:text-base font-light tracking-wide">
+                            Our platform provides a dynamic and collaborative learning environment where you can connect with fellow students, share knowledge, and work together on challenging projects. By actively engaging with your peers, you gain valuable real-world experience, develop essential soft skills, and bridge the critical gap between theoretical knowledge and the ever-evolving demands of the professional world.
+                        </p>
+                        <p className="text-white/70 leading-relaxed text-sm md:text-base font-light tracking-wide">
+                            At E-Labs, we believe in the power of collaborative learning and mentorship to foster innovation, creativity, and personal growth. Join us on this exciting journey of discovery and unlock your full potential.
+                        </p>
+                    </div>
 
                     {/* Footer */}
-                    <div className="mt-8 pt-6 border-t border-white/5 flex items-center gap-4">
-                        <div className="flex-1 h-[1px] bg-gradient-to-r from-accent/20 to-transparent" />
-                        <span className="text-[10px] font-mono text-accent/40 uppercase tracking-[0.3em]">KIIT University</span>
+                    <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <a
+                            href="https://www.instagram.com/elabs.kiit/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-accent/20 bg-accent/5 hover:bg-accent/10 hover:border-accent/40 group transition-all"
+                        >
+                            <Instagram size={14} className="text-accent/70 group-hover:text-accent transition-colors" />
+                            <span className="text-[10px] font-mono text-accent/70 group-hover:text-accent uppercase tracking-[0.2em] font-medium transition-colors">@elabs.kiit</span>
+                        </a>
+                        {/* <span className="text-[10px] font-mono text-accent/30 uppercase tracking-[0.3em]">KIIT University</span> */}
                     </div>
                 </div>
             </motion.div>
