@@ -32,7 +32,7 @@ const Hero = () => {
                 className="relative z-10 text-center"
             >
                 <motion.div variants={itemVariants} className="inline-block mb-4 px-3 py-1 bg-accent/10 border border-accent/20 rounded-full">
-                    <span className="text-accent text-xs font-mono tracking-widest uppercase">E-Labs Presents</span>
+                    <span className="text-accent text-xs font-mono tracking-widest uppercase">ELabs Presents</span>
                 </motion.div>
 
                 <motion.h1
@@ -58,7 +58,7 @@ const Hero = () => {
                     </button>
 
                     <button className="px-8 py-4 border border-text-dim text-text-primary font-bold text-lg hover:border-accent hover:text-accent transition-colors">
-                        ABOUT E-LABS
+                        ABOUT E<span className="text-accent">LABS</span>
                     </button>
                 </motion.div>
             </motion.div>
@@ -70,7 +70,7 @@ const Hero = () => {
                 transition={{ delay: 1.5, duration: 1 }}
                 className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
             >
-                <span className="text-[10px] uppercase tracking-[0.3em] text-text-dim font-mono">Scroll Down</span>
+                {/* <span className="text-[10px] uppercase tracking-[0.3em] text-text-dim font-mono">Scroll Down</span> */}
                 <div className="w-[1px] h-12 bg-gradient-to-b from-accent to-transparent" />
             </motion.div>
         </section>

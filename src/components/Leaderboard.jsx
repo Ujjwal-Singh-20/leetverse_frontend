@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Trophy, Medal, Star, RefreshCcw, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { getOverallLeaderboard } from '../services/api';
+import { getTop10Leaderboard } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
 const Leaderboard = () => {
@@ -12,7 +12,7 @@ const Leaderboard = () => {
     const fetchLeaderboard = async () => {
         setLoading(true);
         try {
-            const response = await getOverallLeaderboard();
+            const response = await getTop10Leaderboard(user?.rollNo);
             setLeaderboardData(response.data);
         } catch (error) {
             console.error('Error fetching leaderboard:', error);
@@ -69,8 +69,8 @@ const Leaderboard = () => {
 
         return [
             ...top10,
-            { type: 'ellipsis' },
-            { ...leaderboardData[currentUserIndex], rank: currentUserIndex + 1 }
+            { type: 'ellipsis', rollNo: 'ellipsis' },
+            leaderboardData[currentUserIndex]
         ];
     };
 

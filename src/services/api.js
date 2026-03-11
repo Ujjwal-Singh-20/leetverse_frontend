@@ -20,7 +20,8 @@ api.interceptors.request.use(async (config) => {
 export const loginUser = () => api.post('/login');
 export const getMyProfile = () => api.get('/me');
 export const getUserProfile = () => api.get('/profile');
-export const getOverallLeaderboard = () => api.get('/leaderboard/overall');
+export const getTop10Leaderboard = (rollNo) => api.get('/leaderboard/top10', { params: { rollNo } });
+export const getFullLeaderboard = () => api.get('/leaderboard/full');
 export const getDailyLeaderboard = (date) => api.get(`/leaderboard/${date}`);
 export const getUserHistory = (rollNo) => api.get(`/user/${rollNo}/history`);
 export const uploadExcel = (formData, date) => api.post('/upload-excel', formData, {

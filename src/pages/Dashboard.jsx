@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { getUserHistory, getUserProfile, getMyProfile, getOverallLeaderboard } from '../services/api';
+import { getUserHistory, getUserProfile, getMyProfile, getFullLeaderboard } from '../services/api';
 import { Trophy, Calendar, Award, User, Users, Eye, X, Shield, ChevronRight } from 'lucide-react';
 import UserAvatar from '../components/UserAvatar';
 
@@ -17,7 +17,7 @@ const UserDetailModal = ({ user, onClose }) => {
             if (!user) return;
             setLoadingRank(true);
             try {
-                const response = await getOverallLeaderboard();
+                const response = await getFullLeaderboard();
                 const leaderboard = response.data;
                 const userIndex = leaderboard.findIndex(s => s.rollNo === user.rollNo);
                 if (userIndex !== -1) {
