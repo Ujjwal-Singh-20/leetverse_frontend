@@ -77,10 +77,10 @@ const Leaderboard = () => {
     const displayData = getDisplayData();
 
     return (
-        <section id="leaderboard" className="py-24 px-4 max-w-5xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <section id="leaderboard" className="py-24 px-4 max-w-5xl mx-auto ">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 ">
                 <div>
-                    <h2 className="text-5xl font-black mb-4 font-display tracking-tighter text-white">THE_<span className="text-accent underline decoration-accent/30 underline-offset-8">LEADERBOARD</span></h2>
+                    <h2 className="text-4xl sm:text-5xl font-black mb-4 font-display tracking-tighter text-white ">THE_<span className="text-accent underline decoration-accent/30 underline-offset-8 ">LEADERBOARD</span></h2>
                     <p className="text-white/70 font-mono tracking-[0.3em] uppercase text-sm font-bold">Season 1 &bull; RANKINGS</p>
                 </div>
                 {/* <button
