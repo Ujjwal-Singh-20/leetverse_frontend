@@ -16,6 +16,7 @@ import Practice from './pages/Practice';
 import ParallaxBackground from './components/ParallaxBackground';
 import ReminderBanner from './components/ReminderBanner';
 import ValidationModal from './components/ValidationModal';
+import PromoPosters from './components/PromoPosters';
 import { ReminderProvider, useReminders } from './context/ReminderContext';
 import { verifyAndComplete } from './services/api';
 import { LogIn, LogOut, User as UserIcon, Shield, X } from 'lucide-react';
@@ -313,6 +314,7 @@ function AppContent() {
       </main>
 
       <ReminderBanner />
+      <PromoPosters />
 
       {showValidation && (
         <ValidationModal
