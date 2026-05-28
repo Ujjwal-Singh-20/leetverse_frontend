@@ -15,7 +15,7 @@ const POSTERS = [
   {
     id: 'gen-ai-workshop-may-2026',
     enabled: true,
-    image: 'public/posters/gen-ai-workshop.jpeg',
+    image: 'posters/gen-ai-workshop.jpeg',
     alt: 'Generative AI Workshop – Sunday 31st May 2026',
     link: "https://forms.gle/K3zUG5NGz552rkTb6",
     expiresAt: '2026-06-01T00:00:00+05:30', // Expires after Sunday midnight IST
