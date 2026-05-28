@@ -1184,7 +1184,14 @@ const Members = () => {
                 ([domain]) =>
                     domain !== 'president' &&
                     domain !== 'vice president'
-            );
+            )
+            .sort(([domainA], [domainB]) => {
+                // Mentoring comes first
+                if (domainA.toLowerCase() === 'mentoring') return -1;
+                if (domainB.toLowerCase() === 'mentoring') return 1;
+                // Rest in alphabetical order
+                return domainA.localeCompare(domainB);
+            });
 
     /* =========================
        PAGE
