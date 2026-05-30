@@ -1,36 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useReminders } from '../context/ReminderContext';
-import { 
-    getCurriculum, getExtraPractice, logExtraPractice, verifyAndComplete,
-    getUserProfile
-} from '../services/api';
+import { getCurriculum, getExtraPractice, logExtraPractice, verifyAndComplete, getUserProfile, getAvailableSeasons } from '../services/api';
 import { Zap, Plus, Layers, Calendar } from 'lucide-react';
 import QuestionCard from '../components/QuestionCard';
 import ValidationModal from '../components/ValidationModal';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SessionSelector = ({ availableSeasons, currentSession, onSessionChange, compact }) => {
+    // Render a compact dropdown (select) for season/level selection
+    const handleChange = (e) => {
+        const [season, level] = e.target.value.split(':');
+        onSessionChange({ season, level });
+    };
     return (
-        <div className={`flex flex-wrap items-center gap-2 ${compact ? 'bg-white/5 p-1 rounded-sm border border-white/10' : ''}`}>
-            {availableSeasons.map(s => (
-                <div key={s.season} className="flex items-center gap-1">
-                    {s.levels.map(l => (
-                        <button
-                            key={l}
-                            onClick={() => onSessionChange({ season: s.season, level: l })}
-                            className={`px-3 py-1 text-[10px] font-mono border transition-all uppercase tracking-widest ${
-                                currentSession.season === s.season && currentSession.level === l
-                                    ? 'bg-accent text-background border-accent font-bold'
-                                    : 'bg-transparent text-white/40 border-white/10 hover:border-white/30 hover:text-white'
-                            }`}
-                        >
-                            {s.season}_{l}
-                        </button>
-                    ))}
-                </div>
-            ))}
-        </div>
+        <select
+            value={`${currentSession.season}:${currentSession.level}`}
+            onChange={handleChange}
+            className="bg-white/5 border border-white/10 text-accent font-mono text-[10px] uppercase tracking-widest rounded-sm p-1"
+        >
+            {availableSeasons.map((s) =>
+                s.levels.map((l) => (
+                    <option key={`${s.season}:${l}`} value={`${s.season}:${l}`}>
+                        {s.season} : {l}
+                    </option>
+                ))
+            )}
+        </select>
     );
 };
 
@@ -40,6 +36,7 @@ const Practice = () => {
     
     const [profile, setProfile] = useState(null);
     const [curriculum, setCurriculum] = useState([]);
+    const [availableSeasons, setAvailableSeasons] = useState([]);
     const [extraPractice, setExtraPractice] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentSession, setCurrentSession] = useState({
@@ -57,16 +54,18 @@ const Practice = () => {
             if (!user?.rollNo) return;
             setLoading(true);
             try {
-                const [profileRes, currRes, extraRes] = await Promise.all([
+                const [profileRes, currRes, extraRes, seasonsRes] = await Promise.all([
                     getUserProfile(currentSession),
                     getCurriculum(currentSession),
-                    getExtraPractice(user.rollNo)
+                    getExtraPractice(user.rollNo),
+                    getAvailableSeasons()
                 ]);
 
                 const dbProfile = profileRes.data.data || profileRes.data;
                 setProfile(dbProfile);
                 setCurriculum(currRes.data || []);
                 setExtraPractice(extraRes.data || []);
+                setAvailableSeasons(seasonsRes.data || []);
             } catch (error) {
                 console.error('Error fetching practice data:', error);
             } finally {
@@ -138,7 +137,7 @@ const Practice = () => {
                     <span className="text-white font-display font-bold uppercase tracking-tight">{currentSession.season} : {currentSession.level}</span>
                 </div>
                 <SessionSelector 
-                    availableSeasons={[{ season: import.meta.env.VITE_CURRENT_SEASON, levels: [import.meta.env.VITE_CURRENT_LEVEL] }]} 
+                    availableSeasons={availableSeasons} 
                     currentSession={currentSession}
                     onSessionChange={setCurrentSession}
                     compact

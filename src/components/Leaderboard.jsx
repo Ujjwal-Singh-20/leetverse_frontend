@@ -23,10 +23,11 @@ const Leaderboard = () => {
                 
                 const envSeason = import.meta.env.VITE_CURRENT_SEASON || 'season1';
                 const envLevel = import.meta.env.VITE_CURRENT_LEVEL || 'level1';
-                
+
                 const sessionExists = seasons.some(s => s.season === envSeason && s.levels.includes(envLevel));
                 if (!sessionExists && seasons.length > 0) {
-                    setCurrentSession({ season: seasons[0].season, level: seasons[0].levels[0] });
+                    // Use the requested envSeason/envLevel even if not present in DB to show empty state
+                    setCurrentSession({ season: envSeason, level: envLevel });
                 } else {
                     setCurrentSession({ season: envSeason, level: envLevel });
                 }
