@@ -14,7 +14,7 @@ import { X, ExternalLink } from 'lucide-react';
 const POSTERS = [
   {
     id: 'gen-ai-workshop-may-2026',
-    enabled: true,
+    enabled: false,
     image: 'posters/gen-ai-workshop.jpeg',
     alt: 'Generative AI Workshop – Sunday 31st May 2026',
     link: "https://forms.gle/K3zUG5NGz552rkTb6",
