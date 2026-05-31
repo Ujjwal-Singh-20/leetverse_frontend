@@ -339,7 +339,11 @@ const MemberCard = ({
                     rounded-3xl
                     h-full
                     overflow-hidden
-                    p-6
+                    ${
+                        executiveType === "president" || executiveType === "vice"
+                            ? "p-0"
+                            : "p-6"
+                    }
                     ${
                         special
                             ? `
@@ -431,147 +435,222 @@ const MemberCard = ({
 
                 <PositionBadge position={person.position} />
 
-                <div className="relative z-10 flex flex-col items-center text-center">
-
-
-                    {/* IMAGE */}
-                    <div
-                        className={`
-                            relative
-                            w-32 h-32 rounded-full
-                            overflow-hidden
-                            mb-5
-                            ${
-                                special
-                                    ? `
-                                    border-2 border-accent/40
-                                    shadow-[0_0_40px_rgba(0,255,170,0.15)]
-                                `
-                                    : `
-                                    border border-accent/20
-                                `
-                            }
-                        `}
-                        style={{
-                            transform: "translateZ(60px)",
-                        }}
-                    >
-
-                        {/* EXECUTIVE RING */}
-                        {special && (
-                            <motion.div
-                                animate={{
-                                    rotate: 360
+                {executiveType === "president" || executiveType === "vice" ? (
+                    <div className="relative z-10 flex flex-col sm:flex-row h-full w-full min-h-[220px]">
+                        {/* IMAGE SIDE */}
+                        <div className="relative w-full sm:w-[42%] h-64 sm:h-auto overflow-hidden">
+                            <img
+                                src={getDirectImageUrl(person.photoUrl)}
+                                alt={person.name}
+                                draggable={false}
+                                className="w-full h-full object-cover select-none pointer-events-none"
+                                style={{
+                                    backfaceVisibility: "hidden",
+                                    transform: "translateZ(0)",
                                 }}
-                                transition={{
-                                    repeat: Infinity,
-                                    duration: 12,
-                                    ease: "linear"
-                                }}
-                                className="
-                                    absolute inset-[-6px]
-                                    rounded-full
-                                    border border-dashed
-                                    border-accent/30
-                                "
                             />
-                        )}
+                            {/* Overlay gradient to fade the image towards the details side / bottom */}
+                            <div className="absolute inset-0 sm:bg-gradient-to-r from-transparent to-[#040c0a37]" />
+                        </div>
 
-                        <img
-                            src={getDirectImageUrl(person.photoUrl)}
-                            alt={person.name}
-                            draggable={false}
-                            className="
-                                w-full h-full object-cover
-                                select-none
-                                pointer-events-none
-                            "
-                            style={{
-                                backfaceVisibility: "hidden",
-                                transform: "translateZ(0)",
-                            }}
-                        />
+                        {/* DETAILS SIDE */}
+                        <div className="flex-1 flex flex-col justify-center p-6 sm:p-8 z-10 relative">
+                            {/* <span className="text-[10px] font-mono tracking-[0.25em] text-accent mb-2 uppercase">
+                                {executiveType === "president" ? "President" : "Vice President"}
+                            </span> */}
+                            <h4
+                                className="text-2xl font-bold text-white tracking-tight mb-3"
+                                style={{
+                                    transform: "translateZ(40px)"
+                                }}
+                            >
+                                {person.name}
+                            </h4>
+
+                            <div
+                                className="flex items-center gap-4 mt-2"
+                                style={{
+                                    transform: "translateZ(45px)"
+                                }}
+                            >
+                                {person.instagram && (
+                                    <a
+                                        href={person.instagram}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-white/40 hover:text-accent transition-colors"
+                                    >
+                                        <Instagram size={18} />
+                                    </a>
+                                )}
+
+                                {person.linkedin && (
+                                    <a
+                                        href={person.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-white/40 hover:text-accent transition-colors"
+                                    >
+                                        <Linkedin size={18} />
+                                    </a>
+                                )}
+
+                                {person.github && (
+                                    <a
+                                        href={person.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-white/40 hover:text-accent transition-colors"
+                                    >
+                                        <Github size={18} />
+                                    </a>
+                                )}
+                            </div>
+                        </div>
                     </div>
+                ) : (
+                    <div className="relative z-10 flex flex-col items-center text-center">
 
-                    <h4
-                        className="
-                            text-xl font-bold
-                            text-white
-                            tracking-tight
-                            mb-2
-                        "
-                        style={{
-                            transform: "translateZ(40px)"
-                        }}
-                    >
-                        {person.name}
-                    </h4>
 
-                    {/* {person.rollNo && (
-                        <p
-                            className="
-                                text-sm text-white/40 mb-5
-                            "
+                        {/* IMAGE */}
+                        <div
+                            className={`
+                                relative
+                                w-32 h-32 rounded-full
+                                overflow-hidden
+                                mb-5
+                                ${
+                                    special
+                                        ? `
+                                        border-2 border-accent/40
+                                        shadow-[0_0_40px_rgba(0,255,170,0.15)]
+                                    `
+                                        : `
+                                        border border-accent/20
+                                    `
+                                }
+                            `}
                             style={{
-                                transform: "translateZ(30px)"
+                                transform: "translateZ(60px)",
                             }}
                         >
-                            {person.rollNo}
-                        </p>
-                    )} */}
 
-                    <div
-                        className="flex items-center gap-4"
-                        style={{
-                            transform: "translateZ(45px)"
-                        }}
-                    >
-                        {person.instagram && (
-                            <a
-                                href={person.instagram}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="
-                                    text-white/40
-                                    hover:text-accent
-                                    transition-colors
-                                "
-                            >
-                                <Instagram size={18} />
-                            </a>
-                        )}
+                            {/* EXECUTIVE RING */}
+                            {special && (
+                                <motion.div
+                                    animate={{
+                                        rotate: 360
+                                    }}
+                                    transition={{
+                                        repeat: Infinity,
+                                        duration: 12,
+                                        ease: "linear"
+                                    }}
+                                    className="
+                                        absolute inset-[-6px]
+                                        rounded-full
+                                        border border-dashed
+                                        border-accent/30
+                                    "
+                                />
+                            )}
 
-                        {person.linkedin && (
-                            <a
-                                href={person.linkedin}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <img
+                                src={getDirectImageUrl(person.photoUrl)}
+                                alt={person.name}
+                                draggable={false}
                                 className="
-                                    text-white/40
-                                    hover:text-accent
-                                    transition-colors
+                                    w-full h-full object-cover
+                                    select-none
+                                    pointer-events-none
                                 "
-                            >
-                                <Linkedin size={18} />
-                            </a>
-                        )}
+                                style={{
+                                    backfaceVisibility: "hidden",
+                                    transform: "translateZ(0)",
+                                }}
+                            />
+                        </div>
 
-                        {person.github && (
-                            <a
-                                href={person.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                        <h4
+                            className="
+                                text-xl font-bold
+                                text-white
+                                tracking-tight
+                                mb-2
+                            "
+                            style={{
+                                transform: "translateZ(40px)"
+                            }}
+                        >
+                            {person.name}
+                        </h4>
+
+                        {/* {person.rollNo && (
+                            <p
                                 className="
-                                    text-white/40
-                                    hover:text-accent
-                                    transition-colors
+                                    text-sm text-white/40 mb-5
                                 "
+                                style={{
+                                    transform: "translateZ(30px)"
+                                }}
                             >
-                                <Github size={18} />
-                            </a>
-                        )}
+                                {person.rollNo}
+                            </p>
+                        )} */}
+
+                        <div
+                            className="flex items-center gap-4"
+                            style={{
+                                transform: "translateZ(45px)"
+                            }}
+                        >
+                            {person.instagram && (
+                                <a
+                                    href={person.instagram}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="
+                                        text-white/40
+                                        hover:text-accent
+                                        transition-colors
+                                    "
+                                >
+                                    <Instagram size={18} />
+                                </a>
+                            )}
+
+                            {person.linkedin && (
+                                <a
+                                    href={person.linkedin}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="
+                                        text-white/40
+                                        hover:text-accent
+                                        transition-colors
+                                    "
+                                >
+                                    <Linkedin size={18} />
+                                </a>
+                            )}
+
+                            {person.github && (
+                                <a
+                                    href={person.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="
+                                        text-white/40
+                                        hover:text-accent
+                                        transition-colors
+                                    "
+                                >
+                                    <Github size={18} />
+                                </a>
+                            )}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </motion.div>
     );
