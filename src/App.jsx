@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Hero from './components/Hero';
 import Leaderboard from './components/Leaderboard';
 import Connect from './components/Connect';
@@ -233,6 +233,28 @@ const Navigation = () => {
   );
 };
 
+const ProtectedRoute = ({ children, requireAdmin = false }) => {
+  const { user, loading, isAdmin } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-accent font-mono text-sm uppercase tracking-widest">
+        Verifying Session...
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+
+  if (requireAdmin && !isAdmin) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  return children;
+};
+
 const HomePage = () => (
   <main className="relative z-10">
     <Hero />
@@ -304,9 +326,21 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<Dashboard />} />
           <Route path="/practice" element={<Practice />} />
-          <Route path="/admin" element={<AdminUpload />} />
-          <Route path="/admin/curriculum" element={<AdminCurriculum />} />
-          <Route path="/admin/progress" element={<AdminProgress />} />
+          <Route path="/admin" element={
+            <ProtectedRoute requireAdmin={true}>
+              <AdminUpload />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/curriculum" element={
+            <ProtectedRoute requireAdmin={true}>
+              <AdminCurriculum />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/progress" element={
+            <ProtectedRoute requireAdmin={true}>
+              <AdminProgress />
+            </ProtectedRoute>
+          } />
           <Route path="/members" element={<Members />} />
           <Route path="/notes" element={<Notes />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
